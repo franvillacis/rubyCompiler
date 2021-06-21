@@ -3,7 +3,69 @@ import re
 import string
 import random
 
-class tokenizador(object):
+class Tokenizador(object):
+
+    tokens = (
+        'corcheteIz', 
+        'corcheteDer',
+        'llaveIz',
+        'llaveDer',
+        'comillas',
+        'dolar',
+        'coma',
+        'pipe',
+        'mayor',
+        'parenIz',
+        'parenDer',
+        'igual',
+        'concatenar',
+        'intervalo',
+        'ignorar',
+        'menor',
+        'keywords',
+        'nombre',
+        'sumar',
+        'restar',
+        'multi',
+        'dividir',
+        'mayorIgual',
+        'menorIgual',
+        'true',
+        'false',
+        'break',
+        'until',
+        'when',
+        'unless',
+        'begin',
+        'end',
+        'case',
+        'class',
+        'def',
+        'defined',
+        'do',
+        'else',
+        'elseif',
+        'end',
+        'ensure',
+        'for',
+        'if',
+        'in',
+        'module',
+        'next',
+        'nil',
+        'not',
+        'or',
+        'redo',
+        'rescue',
+        'retry', 
+        'return',
+        'self',
+        'super',
+        'then', 
+        'undef',
+        'yield',
+        'while',
+    )
 
 	#operadores - true/false - caracteres alfanumericos- simbolos
     t_corcheteIz=r'\['
@@ -22,12 +84,14 @@ class tokenizador(object):
     t_intervalo=r'\.\.'
     t_ignorar='[ \t]'
     t_menor=r'\<'
-    t_keywords=r'true|false|break|until|when|unless|begin|end|case|class|def|defined|do|else|elseif|end|ensure|for|if|in|module'    
+    t_keywords=r'true|false|break|until|when|unless|begin|end|case|class|def|defined|do|else|elseif|end|ensure|for|if|in|module|next|nil|not|or|redo|rescue|retry|return|self|super|then|undef|yield|while'    
     t_nombre= r'[a-zA-Z_][a-zA-Z0-9_]*'
     t_sumar=r'\+'
     t_restar=r'-'
     t_multi=r'\*'
     t_dividir=r'/'
+    t_mayorIgual=r'\>='
+    t_menorIgual=r'\<='
 
 
     def t_elsif(self,t):
