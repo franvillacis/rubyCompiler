@@ -134,7 +134,7 @@ class Tokenizador(object):
         r'class'
         return t
 
-    def t_def(self,t)
+    def t_def(self,t):
         r'def'
         return t
 
