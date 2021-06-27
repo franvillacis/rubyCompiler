@@ -133,7 +133,7 @@ class AnalizadorLexico():
                 tokns.append([token,type,token.value])
         return tokns
 
-archivo_prueba = open('Test.txt','r').read()
+archivo_prueba = open('Test.rb','r').read()
 analizador = AnalizadorLexico() 
 analizador.build()
 tokns = analizador.tokenizer(archivo_prueba)
