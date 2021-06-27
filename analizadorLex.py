@@ -60,7 +60,7 @@ class AnalizadorLexico():
         'INTERVALO',
         'IGNORAR',
         'MENOR',
-        'NOMBRE',
+        'SYMBOL',
         'SUMAR',
         'RESTAR',
         'MULTIPLICAR',
@@ -88,7 +88,7 @@ class AnalizadorLexico():
     t_INTERVALO=r'\.\.'
     t_IGNORAR='[ \t]'
     t_MENOR=r'\<'
-    t_NOMBRE= r'[a-zA-Z_][a-zA-Z0-9_]*'
+    t_SYMBOL= r'[a-zA-Z_][a-zA-Z0-9_]*'
     t_SUMAR=r'\+'
     t_RESTAR=r'-'
     t_MULTIPLICAR=r'\*'
@@ -133,7 +133,7 @@ class AnalizadorLexico():
                 tokns.append([token,type,token.value])
         return tokns
 
-archivo_prueba = open('Test.rb','r').read()
+archivo_prueba = open('test.rb','r').read()
 analizador = AnalizadorLexico() 
 analizador.build()
 tokns = analizador.tokenizer(archivo_prueba)
