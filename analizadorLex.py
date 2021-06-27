@@ -4,7 +4,9 @@ import string
 import random
 
 class AnalizadorLexico():
+    ''' Clase que se encarga de hacer las deficiones de los tokens y palabras reservadas'''
 
+    # Palabras Reservadas para Ruby
     PALABRAS_RESERVADAS = {
         'true':'TRUE',
         'false':'FALSE',
@@ -43,6 +45,7 @@ class AnalizadorLexico():
         'while':'WHILE'
     }
 
+    #Tokens a utilizar
     tokens = (
         'CORCHETEIZ', 
         'CORCHETEDER',
@@ -132,6 +135,7 @@ class AnalizadorLexico():
                 tokns.append([token,type,token.value])
         return tokns
 
+# Test del archivo de prueba de Ruby
 archivo_prueba = open('test.rb','r').read()
 analizador = AnalizadorLexico() 
 analizador.build()
