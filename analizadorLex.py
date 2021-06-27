@@ -86,7 +86,6 @@ class AnalizadorLexico():
     t_IGUAL=r'='
     t_CONCATENAR=r'<<'
     t_INTERVALO=r'\.\.'
-    t_IGNORAR='[ \t]'
     t_MENOR=r'\<'
     t_SYMBOL= r'[a-zA-Z_][a-zA-Z0-9_]*'
     t_SUMAR=r'\+'

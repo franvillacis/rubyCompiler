@@ -6,6 +6,13 @@ def p_asignar(p):
     'asignar : variable IGUAL expresion'
     p[0] = p[1] + p[3]
 
+def p_variable(p):
+    'variable : SYMBOL'
+    p [0]= p[1]
+
+def p_expresion(p):
+    'expresion : '
+
 parser = yacc.yacc()
 
 while True:
