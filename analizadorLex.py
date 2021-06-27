@@ -43,6 +43,7 @@ class AnalizadorLexico():
         'undef':'UNDEF',
         'yield':'YIELD',
         'while':'WHILE'
+
     }
 
     #Tokens a utilizar
@@ -99,6 +100,13 @@ class AnalizadorLexico():
     t_MENORIGUAL=r'\<='
 
     t_ignore = ' \t'
+
+
+
+    def t_SYMBOL(self,t):
+        r'[a-zA-Z_][a-zA-Z0-9_]*'
+        return t
+
 
     def t_STRING(self,t):
         r'\"[^"]*\"'  

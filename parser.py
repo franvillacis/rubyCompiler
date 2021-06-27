@@ -17,9 +17,9 @@ parser = yacc.yacc()
 
 while True:
     try:
-        s = input('>>')    
+        s = input('>>')
     except EOFError:
         break
     if not s: continue
-    resultado = parser.parse(s) 
+    resultado = parser.parse(s)
     print(resultado)

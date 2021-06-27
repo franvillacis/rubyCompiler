@@ -11,3 +11,11 @@ end
 while x<y 	
  do x=x+1 
 end
+
+unless 'a' < 'b'
+  puts "a > b"
+  elsif 'c' > 'd'
+  puts "c > d"
+else
+  puts "c < d"
+end
