@@ -90,7 +90,7 @@ class AnalizadorLexico():
     t_CONCATENAR=r'<<'
     t_INTERVALO=r'\.\.'
     t_MENOR=r'\<'
-    t_SYMBOL= r'[a-zA-Z_][a-zA-Z0-9_]*'
+    #t_NAME= r'[a-zA-Z_][a-zA-Z0-9_]*'
     t_SUMAR=r'\+'
     t_RESTAR=r'-'
     t_MULTIPLICAR=r'\*'
@@ -111,6 +111,11 @@ class AnalizadorLexico():
     def t_COMMENT(self,t):
         r'\#[^\n]*'
         pass
+
+    def t_SYMBOL(self,t):
+        r'[a-zA-Z_][a-zA-Z0-9_]*'
+        t.type = self.PALABRAS_RESERVADAS.get(t.value, 'SYMBOL')
+        return t
 
     def t_error(self,t):
             print("Caracter no reconocido '%s'" % t.value[0])
@@ -140,4 +145,6 @@ archivo_prueba = open('test.rb','r').read()
 analizador = AnalizadorLexico() 
 analizador.build()
 tokns = analizador.tokenizer(archivo_prueba)
-print(tokns)
+if(len(tokns) > 0):
+    print('Los tokens son validos!')
+    print(tokns)
