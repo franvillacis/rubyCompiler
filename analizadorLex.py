@@ -23,7 +23,7 @@ class AnalizadorLexico():
         'defined': 'DEFINE',
         'do': 'DO',
         'else': 'ELSE',
-        'elseif': 'ELSEIF',
+        'elsif': 'ELSIF',
         'ensure': 'ensure',
         'for': 'FOR',
         'if': 'IF',
@@ -73,6 +73,10 @@ class AnalizadorLexico():
                  'MENORIGUAL',
                  'NEWLINE',
                  'NUMERO',
+                 'PUNTO',
+                 'ARROBA',
+                 'DOLAR',
+                 'DARROBA'
              ) + tuple(PALABRAS_RESERVADAS.values())
 
     #operadores - true/false - caracteres alfanumericos- simbolos
@@ -84,20 +88,24 @@ class AnalizadorLexico():
     t_DOLAR=r'\$'
     t_COMA=r'\,'
     t_PIPE=r'\|'
-    t_MAYOR=r'\>'
+    t_MAYOR=r'>'
     t_PARENIZ=r'\('
     t_PARENDER=r'\)'
-    t_IGUAL=r'='
+    t_ASSING=r'='
     t_CONCATENAR=r'<<'
     t_INTERVALO=r'\.\.'
-    t_MENOR=r'\<'
+    t_MENOR=r'<'
     #t_NAME= r'[a-zA-Z_][a-zA-Z0-9_]*'
     t_SUMAR=r'\+'
     t_RESTAR=r'-'
     t_MULTIPLICAR=r'\*'
     t_DIVIDIR=r'/'
-    t_MAYORIGUAL=r'\>='
-    t_MENORIGUAL=r'\<='
+    t_MAYORIGUAL=r'>='
+    t_MENORIGUAL=r'<='
+    t_PUNTO=r'\.'
+    t_ARROBA=r'@'
+    t_DOLAR=r'$'
+    t_DARROBA=r'@@'
 
     t_IGNORE = ' \t'
 
@@ -111,6 +119,21 @@ class AnalizadorLexico():
         r'[a-zA-Z_][a-zA-Z0-9_]*'
         t.type = self.PALABRAS_RESERVADAS.get(t.value, 'SYMBOL')
         return t
+
+    def t_INT(self, t):
+        r'[0-9]+'
+        t.value = int(t.value)
+        return t
+
+    def t_FLOAT(self, t):
+        r'^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$'
+        t.value = float(t.value)
+        return t
+
+    def t_STRING(self, t):
+        r'"[^".]*"'
+        return t
+
 
     def t_error(self,t):
             print("Caracter no reconocido '%s'" % t.value[0])
