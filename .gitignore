@@ -238,4 +238,4 @@ modules.xml
 
 #ply
 parsetab.py
-.out
+*.out
