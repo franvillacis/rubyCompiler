@@ -41,8 +41,11 @@ def p_expresion(p):
                  | expresion RESTAR expresion
                  | expresion MULTIPLICAR expresion
                  | expresion DIVIDIR expresion
-                 | NUMERO
-                 | STRING'''
+                 | termino '''
+
+def p_termino(p):
+    '''termino : NUMERO
+               | STRING '''
 def p_error(p):
     print("Ups! tuviste un error.")
 
