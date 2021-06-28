@@ -75,29 +75,29 @@ class AnalizadorLexico():
                  'NUMERO',
              ) + tuple(PALABRAS_RESERVADAS.values())
 
-    # operadores - true/false - caracteres alfanumericos- simbolos
-    t_CORCHETEIZ = r'\['
-    t_CORCHETEDER = r'\]'
-    t_LLAVEIZ = r'\{'
-    t_LLAVEDER = r'\}'
-    t_COMILLAS = r'\"'
-    t_DOLAR = r'\$'
-    t_COMA = r'\,'
-    t_PIPE = r'\|'
-    t_MAYOR = r'\>'
-    t_PARENIZ = r'\('
-    t_PARENDER = r'\)'
-    t_IGUAL = r'='
-    t_CONCATENAR = r'<<'
-    t_INTERVALO = r'\.\.'
-    t_MENOR = r'\<'
-    t_SYMBOL = r'[a-zA-Z_][a-zA-Z0-9_]*'
-    t_SUMAR = r'\+'
-    t_RESTAR = r'-'
-    t_MULTIPLICAR = r'\*'
-    t_DIVIDIR = r'/'
-    t_MAYORIGUAL = r'\>='
-    t_MENORIGUAL = r'\<='
+    #operadores - true/false - caracteres alfanumericos- simbolos
+    t_CORCHETEIZ=r'\['
+    t_CORCHETEDER=r'\]'
+    t_LLAVEIZ=r'\{'
+    t_LLAVEDER=r'\}'
+    t_COMILLAS=r'\"'
+    t_DOLAR=r'\$'
+    t_COMA=r'\,'
+    t_PIPE=r'\|'
+    t_MAYOR=r'\>'
+    t_PARENIZ=r'\('
+    t_PARENDER=r'\)'
+    t_IGUAL=r'='
+    t_CONCATENAR=r'<<'
+    t_INTERVALO=r'\.\.'
+    t_MENOR=r'\<'
+    #t_NAME= r'[a-zA-Z_][a-zA-Z0-9_]*'
+    t_SUMAR=r'\+'
+    t_RESTAR=r'-'
+    t_MULTIPLICAR=r'\*'
+    t_DIVIDIR=r'/'
+    t_MAYORIGUAL=r'\>='
+    t_MENORIGUAL=r'\<='
 
     t_IGNORE = ' \t'
 
@@ -107,15 +107,20 @@ class AnalizadorLexico():
         r'\#[^\n]*'
         pass
 
-    def t_error(self, t):
-        print("Caracter no reconocido '%s'" % t.value[0])
-        t.lexer.skip(1)
-
-    def t_NEWLINE(self, t):
-        r'\n+'
-        t.lexer.lineno += len(t.value)
+    def t_SYMBOL(self,t):
+        r'[a-zA-Z_][a-zA-Z0-9_]*'
+        t.type = self.PALABRAS_RESERVADAS.get(t.value, 'SYMBOL')
         return t
 
+    def t_error(self,t):
+            print("Caracter no reconocido '%s'" % t.value[0])
+            t.lexer.skip(1)
+    
+    def t_NEWLINE(self,t):
+	    r'\n+'
+	    t.lexer.lineno += len(t.value)
+	    return t
+    
     def build(self, **kwargs):
         self.lexer = lex.lex(module=self, **kwargs)
 
@@ -136,4 +141,6 @@ archivo_prueba = open('test.rb', 'r').read()
 analizador = AnalizadorLexico()
 analizador.build()
 tokns = analizador.tokenizer(archivo_prueba)
-print(tokns)
+if(len(tokns) > 0):
+    print('Los tokens son validos!')
+    print(tokns)
