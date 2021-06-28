@@ -3,6 +3,7 @@ from analizadorLex import AnalizadorLexico
 tokens = AnalizadorLexico.tokens
 
 
+
 def p_blockSentence(p): 
     '''blockSentence : T sentence T blockSentence   
     | T sentence T 
