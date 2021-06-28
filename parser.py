@@ -29,13 +29,27 @@ def p_sentencia(p):
              | elsif
              | unless
              | until
+             | asignar
              | sentencia sentencia
     '''
 
 def p_imprimir(p):
     'imprimir: puts valorVar '
+def p_bloque(p):
+    '''bloque : sentencia NEWLINE bloque
+              | sentencia'''
 
 
+def p_asignar(p):
+    '''asignar : SYMBOL IGUAL expresion '''
+
+
+
+def p_if(p):
+    'if : IF logica THEN expresion'
+
+def p_elseif(p):
+    'elseif : ELSEIF logica THEN expresion'
 
 def p_variable(p):
     'variable: t_STRING t_IGUAL expresion '
@@ -107,6 +121,22 @@ def p_comparador(p):
               | MAYOR
               | MENOR
     '''
+def p_else(p):
+    'else : ELSE'
+
+def p_while(p):
+    'while : WHILE logica NEWLINE bloque'
+
+def p_logica(p):
+    '''logica : SYMBOL MAYOR SYMBOL
+                    | SYMBOL MENOR SYMBOL
+                    | SYMBOL MAYORIGUAL SYMBOL
+                    | SYMBOL MENORIGUAL SYMBOL'''
+def p_expresion(p):
+    '''expresion :NUMERO
+                 | STRING'''
+def p_error(p):
+    print("Ups! tuviste un error.")
 
 
 

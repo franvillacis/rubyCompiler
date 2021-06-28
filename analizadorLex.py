@@ -76,7 +76,8 @@ class AnalizadorLexico():
                  'PUNTO',
                  'ARROBA',
                  'DOLAR',
-                 'DARROBA'
+                 'DARROBA',
+                 'STRING',
              ) + tuple(PALABRAS_RESERVADAS.values())
 
     #operadores - true/false - caracteres alfanumericos- simbolos
@@ -166,4 +167,8 @@ analizador.build()
 tokns = analizador.tokenizer(archivo_prueba)
 if(len(tokns) > 0):
     print('Los tokens son validos!')
+<<<<<<< HEAD
     print(tokns)
+=======
+    #print(tokns)
+>>>>>>> 9f8d27e3365fec0f4c20ca96042c21b8b1189648
