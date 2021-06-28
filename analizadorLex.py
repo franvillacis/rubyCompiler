@@ -72,6 +72,7 @@ class AnalizadorLexico():
         'MENORIGUAL',
         'NEWLINE',
         'NUMERO',
+        'STRING'
     ) + tuple(PALABRAS_RESERVADAS.values())
 
     #operadores - true/false - caracteres alfanumericos- simbolos
@@ -90,7 +91,6 @@ class AnalizadorLexico():
     t_CONCATENAR=r'<<'
     t_INTERVALO=r'\.\.'
     t_MENOR=r'\<'
-    #t_NAME= r'[a-zA-Z_][a-zA-Z0-9_]*'
     t_SUMAR=r'\+'
     t_RESTAR=r'-'
     t_MULTIPLICAR=r'\*'
@@ -147,4 +147,4 @@ analizador.build()
 tokns = analizador.tokenizer(archivo_prueba)
 if(len(tokns) > 0):
     print('Los tokens son validos!')
-    print(tokns)
+    #print(tokns)
