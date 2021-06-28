@@ -3,77 +3,82 @@ import re
 import string
 import random
 
+
 class AnalizadorLexico():
     ''' Clase que se encarga de hacer las deficiones de los tokens y palabras reservadas'''
 
     # Palabras Reservadas para Ruby
     PALABRAS_RESERVADAS = {
-        'true':'TRUE',
-        'false':'FALSE',
-        'break':'BREAK',
-        'until':'UNTIL',
-        'when':'WHEN',
-        'unless':'UNLESS',
-        'begin':'BEGIN',
-        'end':'END',
-        'case':'CASE',
-        'class':'CLASS',
-        'def':'DEF',
-        'defined':'DEFINE',
-        'do':'DO',
-        'else':'ELSE',
-        'elseif':'ELSEIF',
-        'end':'END',
-        'ensure':'ensure',
-        'for':'FOR',
-        'if':'IF',
-        'in':'IN',
-        'module':'MODULE',
-        'next':'NEXT',
-        'nil':'NIL',
-        'not':'NOT',
-        'or':'OR',
-        'redo':'REDO',
-        'rescue':'RESCUE',
-        'retry':'RETRY',
-        'return':'RETURN',
-        'self':'SELF',
-        'super':'SUPER',
-        'then':'THEN',
-        'undef':'UNDEF',
-        'yield':'YIELD',
-        'while':'WHILE'
+        'true': 'TRUE',
+        'false': 'FALSE',
+        'break': 'BREAK',
+        'until': 'UNTIL',
+        'when': 'WHEN',
+        'unless': 'UNLESS',
+        'begin': 'BEGIN',
+        'end': 'END',
+        'case': 'CASE',
+        'class': 'CLASS',
+        'def': 'DEF',
+        'defined': 'DEFINE',
+        'do': 'DO',
+        'else': 'ELSE',
+        'elsif': 'ELSIF',
+        'ensure': 'ensure',
+        'for': 'FOR',
+        'if': 'IF',
+        'in': 'IN',
+        'module': 'MODULE',
+        'next': 'NEXT',
+        'nil': 'NIL',
+        'not': 'NOT',
+        'or': 'OR',
+        'redo': 'REDO',
+        'rescue': 'RESCUE',
+        'retry': 'RETRY',
+        'return': 'RETURN',
+        'self': 'SELF',
+        'super': 'SUPER',
+        'then': 'THEN',
+        'undef': 'UNDEF',
+        'yield': 'YIELD',
+        'while': 'WHILE'
+
     }
 
-    #Tokens a utilizar
+    # Tokens a utilizar
     tokens = (
-        'CORCHETEIZ', 
-        'CORCHETEDER',
-        'LLAVEIZ',
-        'LLAVEDER',
-        'COMILLAS',
-        'DOLAR',
-        'COMA',
-        'PIPE',
-        'MAYOR',
-        'PARENIZ',
-        'PARENDER',
-        'IGUAL',
-        'CONCATENAR',
-        'INTERVALO',
-        'IGNORAR',
-        'MENOR',
-        'SYMBOL',
-        'SUMAR',
-        'RESTAR',
-        'MULTIPLICAR',
-        'DIVIDIR',
-        'MAYORIGUAL',
-        'MENORIGUAL',
-        'NEWLINE',
-        'NUMERO',
-        'STRING'
-    ) + tuple(PALABRAS_RESERVADAS.values())
+                 'CORCHETEIZ',
+                 'CORCHETEDER',
+                 'LLAVEIZ',
+                 'LLAVEDER',
+                 'COMILLAS',
+                 'DOLAR',
+                 'COMA',
+                 'PIPE',
+                 'MAYOR',
+                 'PARENIZ',
+                 'PARENDER',
+                 'ASSING',
+                 'CONCATENAR',
+                 'INTERVALO',
+                 'IGNORAR',
+                 'MENOR',
+                 'SYMBOL',
+                 'SUMAR',
+                 'RESTAR',
+                 'MULTIPLICAR',
+                 'DIVIDIR',
+                 'MAYORIGUAL',
+                 'MENORIGUAL',
+                 'NEWLINE',
+                 'NUMERO',
+                 'PUNTO',
+                 'ARROBA',
+                 'DOLAR',
+                 'DARROBA',
+                 'STRING',
+             ) + tuple(PALABRAS_RESERVADAS.values())
 
     #operadores - true/false - caracteres alfanumericos- simbolos
     t_CORCHETEIZ=r'\['
@@ -84,31 +89,30 @@ class AnalizadorLexico():
     t_DOLAR=r'\$'
     t_COMA=r'\,'
     t_PIPE=r'\|'
-    t_MAYOR=r'\>'
+    t_MAYOR=r'>'
     t_PARENIZ=r'\('
     t_PARENDER=r'\)'
-    t_IGUAL=r'='
+    t_ASSING=r'='
     t_CONCATENAR=r'<<'
     t_INTERVALO=r'\.\.'
-    t_MENOR=r'\<'
+    t_MENOR=r'<'
+    #t_NAME= r'[a-zA-Z_][a-zA-Z0-9_]*'
     t_SUMAR=r'\+'
     t_RESTAR=r'-'
     t_MULTIPLICAR=r'\*'
     t_DIVIDIR=r'/'
-    t_MAYORIGUAL=r'\>='
-    t_MENORIGUAL=r'\<='
+    t_MAYORIGUAL=r'>='
+    t_MENORIGUAL=r'<='
+    t_PUNTO=r'\.'
+    t_ARROBA=r'@'
+    t_DOLAR=r'$'
+    t_DARROBA=r'@@'
 
-    t_ignore = ' \t'
+    t_IGNORE = ' \t'
 
-    def t_STRING(self,t):
-        r'\"[^"]*\"'  
-        return t
+    # definir con expresiones
 
-    def t_NUMERO(self,t):
-        r'\d+'
-        return t
-    
-    def t_COMMENT(self,t):
+    def t_COMMENT(self, t):
         r'\#[^\n]*'
         pass
 
@@ -116,6 +120,21 @@ class AnalizadorLexico():
         r'[a-zA-Z_][a-zA-Z0-9_]*'
         t.type = self.PALABRAS_RESERVADAS.get(t.value, 'SYMBOL')
         return t
+
+    def t_INT(self, t):
+        r'[0-9]+'
+        t.value = int(t.value)
+        return t
+
+    def t_FLOAT(self, t):
+        r'^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$'
+        t.value = float(t.value)
+        return t
+
+    def t_STRING(self, t):
+        r'"[^".]*"'
+        return t
+
 
     def t_error(self,t):
             print("Caracter no reconocido '%s'" % t.value[0])
@@ -127,24 +146,29 @@ class AnalizadorLexico():
 	    return t
     
     def build(self, **kwargs):
-        self.lexer=lex.lex(module=self,**kwargs)
-    
-    def tokenizer(self,data):
-        tokns=[]
+        self.lexer = lex.lex(module=self, **kwargs)
+
+    def tokenizer(self, data):
+        tokns = []
         self.lexer.input(data)
-        while(True):
-            token=self.lexer.token()
+        while (True):
+            token = self.lexer.token()
             if not token:
                 break
-            if(token.type != 'NEWLINE'):
-                tokns.append([token,type,token.value])
+            if (token.type != 'NEWLINE'):
+                tokns.append([token, type, token.value])
         return tokns
 
+
 # Test del archivo de prueba de Ruby
-archivo_prueba = open('test.rb','r').read()
-analizador = AnalizadorLexico() 
+archivo_prueba = open('test.rb', 'r').read()
+analizador = AnalizadorLexico()
 analizador.build()
 tokns = analizador.tokenizer(archivo_prueba)
 if(len(tokns) > 0):
     print('Los tokens son validos!')
+<<<<<<< HEAD
+    print(tokns)
+=======
     #print(tokns)
+>>>>>>> 9f8d27e3365fec0f4c20ca96042c21b8b1189648
