@@ -235,3 +235,7 @@ modules.xml
 # Ignore all local history of files
 .history
 .ionide
+
+#ply
+parsetab.py
+*.out
