@@ -1,8 +1,4 @@
 import ply.lex as lex
-import re
-import string
-import random
-
 
 class AnalizadorLexico():
     ''' Clase que se encarga de hacer las deficiones de los tokens y palabras reservadas'''
@@ -72,12 +68,13 @@ class AnalizadorLexico():
                  'MAYORIGUAL',
                  'MENORIGUAL',
                  'NEWLINE',
-                 'NUMERO',
                  'PUNTO',
                  'ARROBA',
-                 'DOLAR',
                  'DARROBA',
                  'STRING',
+                 'INT',
+                 'FLOAT',
+                 'VARIABLE',
              ) + tuple(PALABRAS_RESERVADAS.values())
 
     #operadores - true/false - caracteres alfanumericos- simbolos
@@ -96,7 +93,6 @@ class AnalizadorLexico():
     t_CONCATENAR=r'<<'
     t_INTERVALO=r'\.\.'
     t_MENOR=r'<'
-    #t_NAME= r'[a-zA-Z_][a-zA-Z0-9_]*'
     t_SUMAR=r'\+'
     t_RESTAR=r'-'
     t_MULTIPLICAR=r'\*'
@@ -105,10 +101,10 @@ class AnalizadorLexico():
     t_MENORIGUAL=r'<='
     t_PUNTO=r'\.'
     t_ARROBA=r'@'
-    t_DOLAR=r'$'
     t_DARROBA=r'@@'
+    t_VARIABLE = r'[a-zA-Z_][a-zA-Z0-9_]*'
 
-    t_IGNORE = ' \t'
+    t_ignore = ' \t'
 
     # definir con expresiones
 
@@ -134,7 +130,6 @@ class AnalizadorLexico():
     def t_STRING(self, t):
         r'"[^".]*"'
         return t
-
 
     def t_error(self,t):
             print("Caracter no reconocido '%s'" % t.value[0])
@@ -167,8 +162,4 @@ analizador.build()
 tokns = analizador.tokenizer(archivo_prueba)
 if(len(tokns) > 0):
     print('Los tokens son validos!')
-<<<<<<< HEAD
-    print(tokns)
-=======
     #print(tokns)
->>>>>>> 9f8d27e3365fec0f4c20ca96042c21b8b1189648
