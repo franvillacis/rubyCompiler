@@ -7,7 +7,7 @@ def p_bloque(p):
     '''bloque : sentencia NEWLINE bloque
               | sentencia'''
     p[0] = p[1]
-    
+
 #Andres Noboa
 def p_sentencia(p):
     '''sentencia : estructura_control
@@ -20,6 +20,7 @@ def p_estructura_control(p):
                           | else
                           | elsif
                           | while'''
+    p[0] = p[1]
 
 def p_if(p):
     '''if : IF PARENIZ logica PARENDER 
@@ -39,18 +40,22 @@ def p_while(p):
 #Andres Noboa
 def p_logica_mayor(p):
     'logica : SYMBOL MAYOR SYMBOL'
+    p[0] = p[1] > p[3]
 
 #Andres Noboa
 def p_logica_menor(p):
     'logica : SYMBOL MENOR SYMBOL'
+    p[0] = p[1] < p[3]
 
 #Andres Noboa
 def p_logica_mayor_igual(p):
     'logica : SYMBOL MAYORIGUAL SYMBOL'
+    p[0] = p[1] >= p[3]
 
 #Andres Noboa
 def p_logica_menor_igual(p):
     'logica : SYMBOL MENORIGUAL SYMBOL'
+    p[0] = p[1] <= p[3]
 
 #Andres Noboa
 def p_expresion_sumar(p):
