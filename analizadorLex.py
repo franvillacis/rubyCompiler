@@ -38,7 +38,8 @@ class AnalizadorLexico():
         'then': 'THEN',
         'undef': 'UNDEF',
         'yield': 'YIELD',
-        'while': 'WHILE'
+        'while': 'WHILE',
+        'puts' : 'PUTS'
 
     }
 
@@ -104,9 +105,9 @@ class AnalizadorLexico():
     t_IGUALIGUAL = r'=='
     t_NOIGUAL = r'!='
     t_PUNTO=r'\.'
-    t_ARROBA=r'@'
+    t_ARROBA=r'@' 
     t_DARROBA=r'@@'
-    t_VARIABLE = r'[a-zA-Z_][a-zA-Z0-9_]*'
+    t_VARIABLE = r'^[a-z][a-zA-Z0-9_]+'
     t_ignore = ' \t'
 
     # definir con expresiones
