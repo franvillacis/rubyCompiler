@@ -15,6 +15,7 @@ def p_sentencia(p):
                  | expresion'''
     p[0] = p[1]
 
+
 #Andres Noboa
 def p_estructura_control(p):
     '''estructura_control : if
@@ -38,25 +39,27 @@ def p_while(p):
     '''while : WHILE PARENIZ logica PARENDER THEN expresion
              | WHILE logica NEWLINE bloque'''
 
-#Andres Noboa
-def p_logica_mayor(p):
-    'logica : SYMBOL MAYOR SYMBOL'
-    p[0] = p[1] > p[3]
+#Francisco Villacis
+def p_expresion_logic(p):
+    '''logica : expresion MAYOR expresion
+                      | expresion MENOR expresion
+                      | expresion MAYORIGUAL expresion
+                      | expresion MENORIGUAL expresion
+                      | expresion IGUALIGUAL expresion
+                      | expresion NOIGUAL expresion'''
+    if p[2] == '>':
+        p[0] = p[1] > p[3]
+    elif p[2] == '<':
+        p[0] = p[1] < p[3]
+    elif p[2] == '>=':
+        p[0] = p[1] >= p[3]
+    elif p[2] == '<=':
+        p[0] = p[1] <= p[3]
+    elif p[2] == '==':
+        p[0] = p[1] == p[3]
+    elif p[2] == '!=':
+        p[0] = p[1] != p[3]
 
-#Andres Noboa
-def p_logica_menor(p):
-    'logica : SYMBOL MENOR SYMBOL'
-    p[0] = p[1] < p[3]
-
-#Andres Noboa
-def p_logica_mayor_igual(p):
-    'logica : SYMBOL MAYORIGUAL SYMBOL'
-    p[0] = p[1] >= p[3]
-
-#Andres Noboa
-def p_logica_menor_igual(p):
-    'logica : SYMBOL MENORIGUAL SYMBOL'
-    p[0] = p[1] <= p[3]
 
 #Andres Noboa
 def p_expresion_sumar(p):
@@ -92,6 +95,7 @@ def p_factor(p):
 
 #Andres Noboa
 def p_error(p):
+    print(p)
     print("Ups! tuviste un error.")
 
 
@@ -105,5 +109,5 @@ logging.basicConfig(
 )
 logger = logging.getLogger()
 
-s = open('test.rb','r').read() 
+s = open('test.rb','r').read()
 result = parser.parse(s, debug=logger)

@@ -67,6 +67,8 @@ class AnalizadorLexico():
                  'DIVIDIR',
                  'MAYORIGUAL',
                  'MENORIGUAL',
+                 'IGUALIGUAL',
+                 'NOIGUAL',
                  'NEWLINE',
                  'PUNTO',
                  'ARROBA',
@@ -86,7 +88,7 @@ class AnalizadorLexico():
     t_DOLAR=r'\$'
     t_COMA=r'\,'
     t_PIPE=r'\|'
-    t_MAYOR=r'>'
+    t_MAYOR = r'>'
     t_PARENIZ=r'\('
     t_PARENDER=r'\)'
     t_ASSING=r'='
@@ -99,11 +101,12 @@ class AnalizadorLexico():
     t_DIVIDIR=r'/'
     t_MAYORIGUAL=r'>='
     t_MENORIGUAL=r'<='
+    t_IGUALIGUAL = r'=='
+    t_NOIGUAL = r'!='
     t_PUNTO=r'\.'
     t_ARROBA=r'@'
     t_DARROBA=r'@@'
     t_VARIABLE = r'[a-zA-Z_][a-zA-Z0-9_]*'
-
     t_ignore = ' \t'
 
     # definir con expresiones
@@ -162,4 +165,4 @@ analizador.build()
 tokns = analizador.tokenizer(archivo_prueba)
 if(len(tokns) > 0):
     print('Los tokens son validos!')
-    #print(tokns)
+    print(tokns)
