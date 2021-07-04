@@ -69,7 +69,7 @@ def p_expresion_logic(p):
     elif p[2] == '!=':
         p[0] = p[1] != p[3]
 
-
+#Ana Briones
 def p_declarador(p): 
     '''declarador : ARROBA
                 | DARROBA'''
@@ -85,7 +85,9 @@ def p_imprimir(p):
 def p_asignar(p):
    'asignar : VARIABLE IGUAL expresion '
 
-#asignacion variable 
+#Ana Briones
+def p_asignar(p):
+   'asignar : declarador VARIABLE IGUAL expresion '
 
 
 #Andres Noboa
@@ -122,15 +124,15 @@ def p_valor(p):
              | FLOAT
     '''
     p[0] = p[1]
-
+#Ana Briones
 def p_valor_var(p):
     '''valor : VARIABLE'''
 
-
+#Ana Briones
 def p_valor(p): 
     '''valor : STRING'''
     p[0] = p[1]
-
+#Ana Briones
 def p_valor_bool(p): 
     '''valor : TRUE
             | FALSE'''
