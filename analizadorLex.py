@@ -1,4 +1,3 @@
-from typing import final
 import ply.lex as lex
 
 class AnalizadorLexico():
