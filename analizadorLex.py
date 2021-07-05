@@ -56,7 +56,7 @@ class AnalizadorLexico():
                  'MAYOR',
                  'PARENIZ',
                  'PARENDER',
-                 'ASSING',
+                 'IGUAL',
                  'CONCATENAR',
                  'INTERVALO',
                  'IGNORAR',
@@ -92,7 +92,7 @@ class AnalizadorLexico():
     t_MAYOR = r'>'
     t_PARENIZ=r'\('
     t_PARENDER=r'\)'
-    t_ASSING=r'='
+    t_IGUAL=r'='
     t_CONCATENAR=r'<<'
     t_INTERVALO=r'\.\.'
     t_MENOR=r'<'
@@ -166,4 +166,3 @@ analizador.build()
 tokns = analizador.tokenizer(archivo_prueba)
 if(len(tokns) > 0):
     print('Los tokens son validos!')
-    print(tokns)

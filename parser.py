@@ -7,7 +7,12 @@ tokens = AnalizadorLexico.tokens
 def p_bloque(p):
     '''bloque : sentencia NEWLINE bloque
               | sentencia'''
-    p[0] = p[1]
+    length = len(p)
+    if length > 3:
+        p[0] = p[1] + p [2] + p[0]
+    else:
+        p[0] = p[1]
+
 
 #Andres Noboa
 def p_sentencia(p):
@@ -70,25 +75,30 @@ def p_expresion_logic(p):
         p[0] = p[1] != p[3]
 
 #Ana Briones
-def p_declarador(p): 
-    '''declarador : ARROBA
-                | DARROBA'''
-
-
-
-#Ana Briones
 def p_imprimir(p):
-    'imprimir: PUTS valor ' 
+    'imprimir : PUTS valor ' 
     print(p[2])
 
-#Ana Briones
+#Andres Noboa
 def p_asignar(p):
-   'asignar : VARIABLE IGUAL expresion '
+   'asignar : SYMBOL IGUAL expresion '
+   p[0] = p[1] = p[3]
 
-#Ana Briones
-def p_asignar(p):
-   'asignar : declarador VARIABLE IGUAL expresion '
+#Ana Briones & Andres Noboa
+def p_asignar_declarador(p):
+   'asignar : variable IGUAL valor '
+   p[0] = p[1] = p[3]
 
+#Andres Noboa
+def p_variable(p):
+    'variable : declarador SYMBOL'
+    p[0] = p[1] + p[2]
+
+#Ana Briones & Andres Noboa
+def p_declarador(p): 
+    '''declarador : ARROBA
+                  | DARROBA'''
+    p[0] = p[1]
 
 #Andres Noboa
 def p_expresion_sumar(p):
@@ -115,23 +125,15 @@ def p_expresion_valor(p):
     'expresion : valor'
     p[0] = p[1]
 
-
-
-
 #Andres Noboa
 def p_valor(p):
     '''valor : INT
              | FLOAT
+             | VARIABLE
+             | STRING
     '''
     p[0] = p[1]
-#Ana Briones
-def p_valor_var(p):
-    '''valor : VARIABLE'''
 
-#Ana Briones
-def p_valor(p): 
-    '''valor : STRING'''
-    p[0] = p[1]
 #Ana Briones
 def p_valor_bool(p): 
     '''valor : TRUE
@@ -163,6 +165,6 @@ while True:
     except EOFError:
         break
     if not s: continue
-    resultado = parser.parse(s)
+    resultado = parser.parse(s,debug=logger)
     print(resultado)
 
