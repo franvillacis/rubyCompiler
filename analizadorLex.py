@@ -38,7 +38,8 @@ class AnalizadorLexico():
         'then': 'THEN',
         'undef': 'UNDEF',
         'yield': 'YIELD',
-        'while': 'WHILE'
+        'while': 'WHILE',
+        'puts' : 'PUTS'
 
     }
 
@@ -55,7 +56,7 @@ class AnalizadorLexico():
                  'MAYOR',
                  'PARENIZ',
                  'PARENDER',
-                 'ASSING',
+                 'IGUAL',
                  'CONCATENAR',
                  'INTERVALO',
                  'IGNORAR',
@@ -91,7 +92,7 @@ class AnalizadorLexico():
     t_MAYOR = r'>'
     t_PARENIZ=r'\('
     t_PARENDER=r'\)'
-    t_ASSING=r'='
+    t_IGUAL=r'='
     t_CONCATENAR=r'<<'
     t_INTERVALO=r'\.\.'
     t_MENOR=r'<'
@@ -104,9 +105,9 @@ class AnalizadorLexico():
     t_IGUALIGUAL = r'=='
     t_NOIGUAL = r'!='
     t_PUNTO=r'\.'
-    t_ARROBA=r'@'
+    t_ARROBA=r'@' 
     t_DARROBA=r'@@'
-    t_VARIABLE = r'[a-zA-Z_][a-zA-Z0-9_]*'
+    t_VARIABLE = r'^[a-z][a-zA-Z0-9_]+'
     t_ignore = ' \t'
 
     # definir con expresiones
@@ -165,4 +166,3 @@ analizador.build()
 tokns = analizador.tokenizer(archivo_prueba)
 if(len(tokns) > 0):
     print('Los tokens son validos!')
-    print(tokns)

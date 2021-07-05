@@ -7,11 +7,19 @@ tokens = AnalizadorLexico.tokens
 def p_bloque(p):
     '''bloque : sentencia NEWLINE bloque
               | sentencia'''
-    p[0] = p[1]
+    length = len(p)
+    if length > 3:
+        p[0] = p[1] + p [2] + p[0]
+    else:
+        p[0] = p[1]
+
 
 #Andres Noboa
 def p_sentencia(p):
     '''sentencia : estructura_control
+                 | logica
+                 | asignar
+                 | imprimir 
                  | expresion'''
     p[0] = p[1]
 
@@ -24,20 +32,26 @@ def p_estructura_control(p):
                           | while'''
     p[0] = p[1]
 
+#Ana Briones
 def p_if(p):
-    '''if : IF PARENIZ logica PARENDER 
+  ''' if  : IF PARENIZ logica PARENDER THEN expresion
           | IF logica THEN expresion'''
+
+#Ana Briones        
 
 def p_elsif(p):
     '''elsif : ELSIF PARENIZ logica PARENDER THEN expresion
              | ELSIF logica THEN expresion'''
-
+#Ana Briones
 def p_else(p):
-    'else : ELSE'
-
+    '''else : ELSE expresion END
+            | ELSE NEWLINE bloque END
+    '''
+#ana Briones
 def p_while(p):
-    '''while : WHILE PARENIZ logica PARENDER THEN expresion
-             | WHILE logica NEWLINE bloque'''
+    '''while : WHILE PARENIZ logica PARENDER DO expresion END
+             | WHILE logica NEWLINE DO expresion END
+             | WHILE logica NEWLINE DO bloque END'''
 
 #Francisco Villacis
 def p_expresion_logic(p):
@@ -60,6 +74,31 @@ def p_expresion_logic(p):
     elif p[2] == '!=':
         p[0] = p[1] != p[3]
 
+#Ana Briones
+def p_imprimir(p):
+    'imprimir : PUTS valor ' 
+    print(p[2])
+
+#Andres Noboa
+def p_asignar(p):
+   'asignar : SYMBOL IGUAL expresion '
+   p[0] = p[1] = p[3]
+
+#Ana Briones & Andres Noboa
+def p_asignar_declarador(p):
+   'asignar : variable IGUAL valor '
+   p[0] = p[1] = p[3]
+
+#Andres Noboa
+def p_variable(p):
+    'variable : declarador SYMBOL'
+    p[0] = p[1] + p[2]
+
+#Ana Briones & Andres Noboa
+def p_declarador(p): 
+    '''declarador : ARROBA
+                  | DARROBA'''
+    p[0] = p[1]
 
 #Andres Noboa
 def p_expresion_sumar(p):
@@ -82,16 +121,27 @@ def p_expresion_dividir(p):
     p[0] = p[1] / p[3]
 
 #Andres Noboa
-def p_expresion_factor(p):
-    'expresion : factor'
+def p_expresion_valor(p):
+    'expresion : valor'
     p[0] = p[1]
 
 #Andres Noboa
-def p_factor(p):
-    '''factor : INT
-              | FLOAT
-              | STRING '''
+def p_valor(p):
+    '''valor : INT
+             | FLOAT
+             | VARIABLE
+             | STRING
+    '''
     p[0] = p[1]
+
+#Ana Briones
+def p_valor_bool(p): 
+    '''valor : TRUE
+            | FALSE'''
+    if p[1] == 'true':
+        p[0] = True
+    else:
+        p[0] = False
 
 #Andres Noboa
 def p_error(p):
@@ -109,5 +159,12 @@ logging.basicConfig(
 )
 logger = logging.getLogger()
 
-s = open('test.rb','r').read()
-result = parser.parse(s, debug=logger)
+while True:
+    try:
+         s = input('>>')
+    except EOFError:
+        break
+    if not s: continue
+    resultado = parser.parse(s,debug=logger)
+    print(resultado)
+
