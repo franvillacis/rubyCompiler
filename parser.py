@@ -29,29 +29,40 @@ def p_estructura_control(p):
     '''estructura_control : if
                           | else
                           | elsif
+                          | unless
+                          | until
                           | while'''
     p[0] = p[1]
 
 #Ana Briones
 def p_if(p):
-  ''' if  : IF PARENIZ logica PARENDER THEN expresion
-          | IF logica THEN expresion'''
+  ''' if  : IF PARENIZ logica PARENDER THEN sentencia
+          | IF logica THEN sentencia'''
+
+
+#Ana Briones
+def p_unless(p):
+    'unless : UNLESS sentencia'
+
 
 #Ana Briones        
 
 def p_elsif(p):
-    '''elsif : ELSIF PARENIZ logica PARENDER THEN expresion
-             | ELSIF logica THEN expresion'''
+    '''elsif : ELSIF PARENIZ logica PARENDER THEN sentencia
+             | ELSIF logica THEN sentencia'''
 #Ana Briones
 def p_else(p):
-    '''else : ELSE expresion END
+    '''else : ELSE sentencia END
             | ELSE NEWLINE bloque END
     '''
 #ana Briones
 def p_while(p):
-    '''while : WHILE PARENIZ logica PARENDER DO expresion END
-             | WHILE logica NEWLINE DO expresion END
+    '''while : WHILE PARENIZ logica PARENDER DO sentencia END
+             | WHILE logica NEWLINE DO sentencia END
              | WHILE logica NEWLINE DO bloque END'''
+#Ana
+def p_until(p):
+    ' until : UNTIL logica DO sentencia END '
 
 #Francisco Villacis
 def p_expresion_logic(p):
@@ -74,12 +85,13 @@ def p_expresion_logic(p):
     elif p[2] == '!=':
         p[0] = p[1] != p[3]
 
+
 #Ana Briones
 def p_imprimir(p):
-    'imprimir : PUTS valor ' 
-    print(p[2])
+    'imprimir : PUTS valor'
+    p[0]=(p[2])
 
-#Andres Noboa
+#Andres Noboa & Ana Briones
 def p_asignar(p):
    'asignar : SYMBOL IGUAL expresion '
    p[0] = p[1] = p[3]

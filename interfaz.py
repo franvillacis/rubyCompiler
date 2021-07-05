@@ -5,6 +5,7 @@ from PyQt5.QtWidgets import QApplication, QLabel, QWidget, QMainWindow, QLineEdi
 import sys
 from parser import *
 
+
 from pyqt5_plugins.examplebutton import QtWidgets
 
 

@@ -1,3 +1,4 @@
+from typing import final
 import ply.lex as lex
 
 class AnalizadorLexico():
@@ -111,6 +112,9 @@ class AnalizadorLexico():
     t_ignore = ' \t'
 
     # definir con expresiones
+    def t_END(self,t):
+        r'\n'
+        pass
 
     def t_COMMENT(self, t):
         r'\#[^\n]*'
