@@ -1,5 +1,16 @@
+<<<<<<< HEAD
 from PyQt5.QtWidgets import QApplication, QLabel, QMainWindow, QPushButton, QPlainTextEdit, QFileDialog, QScrollArea
 from PyQt5.QtWidgets import QApplication, QLabel, QMainWindow, QPushButton, QPlainTextEdit
+=======
+from PyQt5 import QtCore, QtGui
+from PyQt5.QtCore import Qt, pyqtSlot
+from PyQt5.QtWidgets import QApplication, QLabel, QWidget, QMainWindow, QLineEdit, QPushButton, QTextEdit, \
+    QPlainTextEdit, QVBoxLayout
+import sys
+from parser import *
+
+
+>>>>>>> 504466d3375733a8bdeecf6cc61e9bb092b65997
 from pyqt5_plugins.examplebutton import QtWidgets
 
 from parser import *

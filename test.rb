@@ -3,13 +3,13 @@ y=5
 z=2
 
 if x>2 then y=x+1
-elsif x<=2 then=x+2 y 
+elsif x<=2 then y=x+2 
 else y=0 
 end
 
 
 while x<y 	
- do x=x+1 
+ do puts "Hola Mundo"
 end
 
 
