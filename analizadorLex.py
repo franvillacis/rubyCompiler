@@ -61,7 +61,7 @@ class AnalizadorLexico():
                  'INTERVALO',
                  'IGNORAR',
                  'MENOR',
-                 'SYMBOL',
+                 'ID',
                  'SUMAR',
                  'RESTAR',
                  'MULTIPLICAR',
@@ -77,7 +77,6 @@ class AnalizadorLexico():
                  'STRING',
                  'INT',
                  'FLOAT',
-                 'VARIABLE',
              ) + tuple(PALABRAS_RESERVADAS.values())
 
     #operadores - true/false - caracteres alfanumericos- simbolos
@@ -107,7 +106,6 @@ class AnalizadorLexico():
     t_PUNTO=r'\.'
     t_ARROBA=r'@' 
     t_DARROBA=r'@@'
-    t_VARIABLE = r'^[a-z][a-zA-Z0-9_]+'
     t_ignore = ' \t'
 
     # definir con expresiones
@@ -119,9 +117,9 @@ class AnalizadorLexico():
         r'\#[^\n]*'
         pass
 
-    def t_SYMBOL(self,t):
+    def t_ID(self,t):
         r'[a-zA-Z_][a-zA-Z0-9_]*'
-        t.type = self.PALABRAS_RESERVADAS.get(t.value, 'SYMBOL')
+        t.type = self.PALABRAS_RESERVADAS.get(t.value, 'ID')
         return t
 
     def t_INT(self, t):

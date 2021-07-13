@@ -36,8 +36,15 @@ def p_estructura_control(p):
 
 #Ana Briones
 def p_if(p):
-  ''' if  : IF PARENIZ logica PARENDER THEN sentencia
-          | IF logica THEN sentencia'''
+    ''' if  : IF PARENIZ logica PARENDER THEN sentencia
+            | IF logica THEN sentencia'''
+    if p[2] == "(":
+        if p[3]:
+            p[0]=p[6]
+    else:
+        if p[2]:
+            p[0]=p[4]
+
 
 
 #Ana Briones
@@ -60,6 +67,15 @@ def p_while(p):
     '''while : WHILE PARENIZ logica PARENDER DO sentencia END
              | WHILE logica NEWLINE DO sentencia END
              | WHILE logica NEWLINE DO bloque END'''
+    
+    if p[2] == "(":
+        while p[3]:
+            print(p[6])
+    else:
+        while p[2]:
+            print(p[5])
+
+
 #Ana
 def p_until(p):
     ' until : UNTIL logica DO sentencia END '
@@ -93,7 +109,7 @@ def p_imprimir(p):
 
 #Andres Noboa & Ana Briones
 def p_asignar(p):
-   'asignar : SYMBOL IGUAL expresion '
+   'asignar : ID IGUAL expresion '
    p[0] = p[1] = p[3]
 
 #Ana Briones & Andres Noboa
@@ -103,7 +119,7 @@ def p_asignar_declarador(p):
 
 #Andres Noboa
 def p_variable(p):
-    'variable : declarador SYMBOL'
+    'variable : declarador ID'
     p[0] = p[1] + p[2]
 
 #Ana Briones & Andres Noboa
@@ -141,7 +157,7 @@ def p_expresion_valor(p):
 def p_valor(p):
     '''valor : INT
              | FLOAT
-             | VARIABLE
+             | ID
              | STRING
     '''
     p[0] = p[1]
