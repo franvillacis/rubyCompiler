@@ -6,9 +6,6 @@ import sys
 from parser import *
 
 
-from pyqt5_plugins.examplebutton import QtWidgets
-
-from parser import *
 class MainWindow(QMainWindow):
 
     def __init__(self):
