@@ -4,6 +4,7 @@ from analizadorLex import AnalizadorLexico
 tokens = AnalizadorLexico.tokens
 
 array = []
+diccionario = {}
 
 #Andres Noboa
 def p_bloque(p):
@@ -35,17 +36,6 @@ def p_estructura_control(p):
                           | until
                           | while'''
     p[0] = p[1]
-
-
-
-#Ana Briones
-#Estructura de datos hash
-
-
-# def p_arggs(p):
-#     '''args : LLAVEIZ valor HASHROCKET valor LLAVEDER'''
-#   
-
 
 
 
@@ -128,7 +118,8 @@ def p_imprimir(p):
 #Andres Noboa & Ana Briones
 def p_asignar(p):
    '''asignar : ID IGUAL expresion 
-              | ID IGUAL array'''
+              | ID IGUAL array
+              | ID IGUAL hash'''
    p[0] = p[1] = p[3]
 
 #Ana Briones & Andres Noboa
@@ -137,7 +128,7 @@ def p_asignar_declarador(p):
    p[0] = p[1] = p[3]
 
 
-#Ana Briones
+#Ana Briones 
 #Estructura de datos: Array
 def p_arrayWrap(p):
     '''
@@ -155,6 +146,29 @@ def p_args(p):
     'args : valor'
     array.append(p[1])
     p[0] = p[1]
+
+
+#Ana Briones
+#Estructura de datos hash
+def p_hash(p):
+    '''
+    hash : LLAVEIZ dicc LLAVEDER
+    '''
+    p[0]= diccionario
+
+def p_dicc(p):
+     'dicc : dicc COMA dicc ' 
+     p[0] = p[1]
+
+def p_dic(p):
+     'dicc : valor HASHROCKET valor '   
+     diccionario[p[1]]=p[3]
+     p[0] = p[1]
+
+
+
+
+
 
 #Andres Noboa
 def p_variable(p):
