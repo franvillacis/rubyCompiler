@@ -3,6 +3,8 @@ import logging
 from analizadorLex import AnalizadorLexico
 tokens = AnalizadorLexico.tokens
 
+array = []
+
 #Andres Noboa
 def p_bloque(p):
     '''bloque : sentencia NEWLINE bloque
@@ -20,7 +22,6 @@ def p_sentencia(p):
                  | logica
                  | asignar
                  | imprimir 
-                 | array 
                  | expresion'''
     p[0] = p[1]
 
@@ -96,27 +97,6 @@ def p_while(p):
 def p_until(p):
     ' until : UNTIL logica DO sentencia END '
 
-#Ana Briones
-#Estructura de datos: Array
-def p_arrayWrap(p):
-    '''
-    array :  CORCHETEIZ args CORCHETEDER
-    '''
-    p[0]=list(p[2])
-  
-
-#Ana Briones
-def p_args(p):
-    '''args : valor'''
-    p[0] = p[1]
-
-#Ana Briones
-def p_arggs(p):
-    '''args : args COMA args'''
-    p[1].append(p[3])
-    p[0] = p[1]
-    
-
 
 #Francisco Villacis
 def p_expresion_logic(p):
@@ -140,12 +120,6 @@ def p_expresion_logic(p):
         p[0] = p[1] != p[3]
 
 
-
-
-
-
-
-
 #Ana Briones
 def p_imprimir(p):
     'imprimir : PUTS valor'
@@ -153,13 +127,34 @@ def p_imprimir(p):
 
 #Andres Noboa & Ana Briones
 def p_asignar(p):
-   'asignar : ID IGUAL expresion '
+   '''asignar : ID IGUAL expresion 
+              | ID IGUAL array'''
    p[0] = p[1] = p[3]
 
 #Ana Briones & Andres Noboa
 def p_asignar_declarador(p):
    'asignar : variable IGUAL valor '
    p[0] = p[1] = p[3]
+
+
+#Ana Briones
+#Estructura de datos: Array
+def p_arrayWrap(p):
+    '''
+    array :  CORCHETEIZ args CORCHETEDER
+    '''
+    p[0]=array
+
+#Ana Briones
+def p_arggs(p):
+    'args : args COMA args'
+    p[0] = p[1]
+
+#Ana Briones
+def p_args(p):
+    'args : valor'
+    array.append(p[1])
+    p[0] = p[1]
 
 #Andres Noboa
 def p_variable(p):
@@ -215,28 +210,29 @@ def p_valor_bool(p):
     else:
         p[0] = False
 
+
 #Andres Noboa
 def p_error(p):
     print(p)
     print("Ups! tuviste un error.")
 
 
-# parser = yacc.yacc()
-#
-# logging.basicConfig(
-#     level = logging.DEBUG,
-#     filename = "parselog.txt",
-#     filemode = "w",
-#     format = "%(filename)10s:%(lineno)4d:%(message)s"
-# )
-# logger = logging.getLogger()
-#
-# while True:
-#     try:
-#          s = input('>>')
-#     except EOFError:
-#         break
-#     if not s: continue
-#     resultado = parser.parse(s,debug=logger)
-#     print(resultado)
+parser = yacc.yacc()
+
+logging.basicConfig(
+    level = logging.DEBUG,
+    filename = "parselog.txt",
+    filemode = "w",
+    format = "%(filename)10s:%(lineno)4d:%(message)s"
+)
+logger = logging.getLogger()
+
+while True:
+    try:
+        s = input('>>')
+    except EOFError:
+        break
+    if not s: continue
+    resultado = parser.parse(s,debug=logger)
+    print(resultado)
 

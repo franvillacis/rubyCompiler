@@ -78,8 +78,6 @@ class AnalizadorLexico():
                  'INT',
                  'FLOAT',
                  'HASHROCKET',
-                 'ID',
-                 'VARIABLE'
              ) + tuple(PALABRAS_RESERVADAS.values())
 
     #operadores - true/false - caracteres alfanumericos- simbolos
@@ -109,7 +107,6 @@ class AnalizadorLexico():
     t_PUNTO=r'\.'
     t_ARROBA=r'@' 
     t_DARROBA=r'@@'
-    t_VARIABLE = r'^[a-z][a-zA-Z0-9_]+'
     t_HASHROCKET= r'=>'
     t_ignore = ' \t'
 
