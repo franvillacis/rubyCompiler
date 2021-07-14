@@ -221,7 +221,6 @@ def p_expresion_valor(p):
 def p_valor(p):
     '''valor : INT
              | FLOAT
-             | ID
              | STRING
     '''
     p[0] = p[1]
