@@ -7,37 +7,37 @@ class AnalizadorLexico():
     PALABRAS_RESERVADAS = {
         'true': 'TRUE',
         'false': 'FALSE',
-        'break': 'BREAK',
+    # 'break': 'BREAK',
         'until': 'UNTIL',
-        'when': 'WHEN',
+     #   'when': 'WHEN',
         'unless': 'UNLESS',
-        'begin': 'BEGIN',
+      #  'begin': 'BEGIN',
         'end': 'END',
-        'case': 'CASE',
-        'class': 'CLASS',
+       # 'case': 'CASE',
+      #  'class': 'CLASS',
         'def': 'DEF',
-        'defined': 'DEFINE',
+      #  'defined': 'DEFINE',
         'do': 'DO',
         'else': 'ELSE',
         'elsif': 'ELSIF',
-        'ensure': 'ensure',
+       # 'ensure': 'ensure',
         'for': 'FOR',
         'if': 'IF',
         'in': 'IN',
-        'module': 'MODULE',
-        'next': 'NEXT',
-        'nil': 'NIL',
+      #  'module': 'MODULE',
+      #  'next': 'NEXT',
+      #  'nil': 'NIL',
         'not': 'NOT',
         'or': 'OR',
-        'redo': 'REDO',
-        'rescue': 'RESCUE',
-        'retry': 'RETRY',
+       # 'redo': 'REDO',
+        #'rescue': 'RESCUE',
+       # 'retry': 'RETRY',
         'return': 'RETURN',
-        'self': 'SELF',
-        'super': 'SUPER',
+       # 'self': 'SELF',
+       # 'super': 'SUPER',
         'then': 'THEN',
-        'undef': 'UNDEF',
-        'yield': 'YIELD',
+       # 'undef': 'UNDEF',
+      #  'yield': 'YIELD',
         'while': 'WHILE',
         'puts' : 'PUTS'
 
@@ -77,7 +77,9 @@ class AnalizadorLexico():
                  'STRING',
                  'INT',
                  'FLOAT',
-                 'VARIABLE',
+                 'HASHROCKET',
+                 'ID',
+                 'VARIABLE'
              ) + tuple(PALABRAS_RESERVADAS.values())
 
     #operadores - true/false - caracteres alfanumericos- simbolos
@@ -108,6 +110,7 @@ class AnalizadorLexico():
     t_ARROBA=r'@' 
     t_DARROBA=r'@@'
     t_VARIABLE = r'^[a-z][a-zA-Z0-9_]+'
+    t_HASHROCKET= r'=>'
     t_ignore = ' \t'
 
     # definir con expresiones
@@ -119,9 +122,9 @@ class AnalizadorLexico():
         r'\#[^\n]*'
         pass
 
-    def t_SYMBOL(self,t):
+    def t_ID(self,t):
         r'[a-zA-Z_][a-zA-Z0-9_]*'
-        t.type = self.PALABRAS_RESERVADAS.get(t.value, 'SYMBOL')
+        t.type = self.PALABRAS_RESERVADAS.get(t.value, 'ID')
         return t
 
     def t_INT(self, t):

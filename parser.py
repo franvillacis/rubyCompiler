@@ -20,6 +20,7 @@ def p_sentencia(p):
                  | logica
                  | asignar
                  | imprimir 
+                 | array 
                  | expresion'''
     p[0] = p[1]
 
@@ -33,6 +34,21 @@ def p_estructura_control(p):
                           | until
                           | while'''
     p[0] = p[1]
+
+
+
+#Ana Briones
+#Estructura de datos hash
+
+
+# def p_arggs(p):
+#     '''args : LLAVEIZ valor HASHROCKET valor LLAVEDER'''
+#   
+
+
+
+
+
 
 #Ana Briones
 def p_if(p):
@@ -64,6 +80,28 @@ def p_while(p):
 def p_until(p):
     ' until : UNTIL logica DO sentencia END '
 
+#Ana Briones
+#Estructura de datos: Array
+def p_arrayWrap(p):
+    '''
+    array :  CORCHETEIZ args CORCHETEDER
+    '''
+    p[0]=list(p[2])
+  
+
+#Ana Briones
+def p_args(p):
+    '''args : valor'''
+    p[0] = p[1]
+
+#Ana Briones
+def p_arggs(p):
+    '''args : args COMA args'''
+    p[1].append(p[3])
+    p[0] = p[1]
+    
+
+
 #Francisco Villacis
 def p_expresion_logic(p):
     '''logica : expresion MAYOR expresion
@@ -86,6 +124,12 @@ def p_expresion_logic(p):
         p[0] = p[1] != p[3]
 
 
+
+
+
+
+
+
 #Ana Briones
 def p_imprimir(p):
     'imprimir : PUTS valor'
@@ -93,7 +137,7 @@ def p_imprimir(p):
 
 #Andres Noboa & Ana Briones
 def p_asignar(p):
-   'asignar : SYMBOL IGUAL expresion '
+   'asignar : ID IGUAL expresion '
    p[0] = p[1] = p[3]
 
 #Ana Briones & Andres Noboa
@@ -103,7 +147,7 @@ def p_asignar_declarador(p):
 
 #Andres Noboa
 def p_variable(p):
-    'variable : declarador SYMBOL'
+    'variable : declarador ID'
     p[0] = p[1] + p[2]
 
 #Ana Briones & Andres Noboa
