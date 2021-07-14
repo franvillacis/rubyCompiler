@@ -52,8 +52,15 @@ def p_estructura_control(p):
 
 #Ana Briones
 def p_if(p):
-  ''' if  : IF PARENIZ logica PARENDER THEN sentencia
-          | IF logica THEN sentencia'''
+    ''' if  : IF PARENIZ logica PARENDER THEN sentencia
+            | IF logica THEN sentencia'''
+    if p[2] == "(":
+        if p[3]:
+            p[0]=p[6]
+    else:
+        if p[2]:
+            p[0]=p[4]
+
 
 
 #Ana Briones
@@ -76,6 +83,15 @@ def p_while(p):
     '''while : WHILE PARENIZ logica PARENDER DO sentencia END
              | WHILE logica NEWLINE DO sentencia END
              | WHILE logica NEWLINE DO bloque END'''
+    
+    if p[2] == "(":
+        while p[3]:
+            print(p[6])
+    else:
+        while p[2]:
+            print(p[5])
+
+
 #Ana
 def p_until(p):
     ' until : UNTIL logica DO sentencia END '
@@ -185,7 +201,7 @@ def p_expresion_valor(p):
 def p_valor(p):
     '''valor : INT
              | FLOAT
-             | VARIABLE
+             | ID
              | STRING
     '''
     p[0] = p[1]
@@ -205,22 +221,22 @@ def p_error(p):
     print("Ups! tuviste un error.")
 
 
-parser = yacc.yacc()
-
-logging.basicConfig(
-    level = logging.DEBUG,
-    filename = "parselog.txt",
-    filemode = "w",
-    format = "%(filename)10s:%(lineno)4d:%(message)s"
-)
-logger = logging.getLogger()
-
-while True:
-    try:
-         s = input('>>')
-    except EOFError:
-        break
-    if not s: continue
-    resultado = parser.parse(s,debug=logger)
-    print(resultado)
+# parser = yacc.yacc()
+#
+# logging.basicConfig(
+#     level = logging.DEBUG,
+#     filename = "parselog.txt",
+#     filemode = "w",
+#     format = "%(filename)10s:%(lineno)4d:%(message)s"
+# )
+# logger = logging.getLogger()
+#
+# while True:
+#     try:
+#          s = input('>>')
+#     except EOFError:
+#         break
+#     if not s: continue
+#     resultado = parser.parse(s,debug=logger)
+#     print(resultado)
 

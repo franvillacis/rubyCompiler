@@ -61,7 +61,7 @@ class AnalizadorLexico():
                  'INTERVALO',
                  'IGNORAR',
                  'MENOR',
-                 'SYMBOL',
+                 'ID',
                  'SUMAR',
                  'RESTAR',
                  'MULTIPLICAR',
