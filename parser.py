@@ -5,6 +5,8 @@ tokens = AnalizadorLexico.tokens
 
 array = []
 diccionario = {}
+temp1 = 0
+temp2 = 0
 
 #Andres Noboa
 def p_bloque(p):
@@ -34,11 +36,9 @@ def p_estructura_control(p):
                           | elsif
                           | unless
                           | until
-                          | while'''
+                          | while
+                          | for'''
     p[0] = p[1]
-
-
-
 
 
 #Ana Briones
@@ -52,6 +52,10 @@ def p_if(p):
         if p[2]:
             p[0]=p[4]
 
+
+#Andres Noboa
+def p_for(p):
+    'for : FOR ID IN expresion_for sentencia END'
 
 
 #Ana Briones
@@ -83,9 +87,12 @@ def p_while(p):
             print(p[5])
 
 
-#Ana
+#Ana y Andres NOboa
 def p_until(p):
     ' until : UNTIL logica DO sentencia END '
+    while not(p[2]):
+        print(p[4])
+    
 
 
 #Francisco Villacis
@@ -113,6 +120,7 @@ def p_expresion_logic(p):
 #Ana Briones
 def p_imprimir(p):
     'imprimir : PUTS valor'
+    print(p[2])
     p[0]=(p[2])
 
 #Andres Noboa & Ana Briones
@@ -166,10 +174,6 @@ def p_dic(p):
      p[0] = p[1]
 
 
-
-
-
-
 #Andres Noboa
 def p_variable(p):
     'variable : declarador ID'
@@ -180,6 +184,13 @@ def p_declarador(p):
     '''declarador : ARROBA
                   | DARROBA'''
     p[0] = p[1]
+
+#Andres Noboa
+def p_expresion_for(p):
+    'expresion_for : valor INTERVALO valor'
+    temp1 = p[1]
+    temp2 = p[3]
+
 
 #Andres Noboa
 def p_expresion_sumar(p):
@@ -231,22 +242,21 @@ def p_error(p):
     print("Ups! tuviste un error.")
 
 
-parser = yacc.yacc()
+# parser = yacc.yacc()
 
-logging.basicConfig(
-    level = logging.DEBUG,
-    filename = "parselog.txt",
-    filemode = "w",
-    format = "%(filename)10s:%(lineno)4d:%(message)s"
-)
-logger = logging.getLogger()
+# logging.basicConfig(
+#     level = logging.DEBUG,
+#     filename = "parselog.txt",
+#     filemode = "w",
+#     format = "%(filename)10s:%(lineno)4d:%(message)s"
+# )
+# logger = logging.getLogger()
 
-while True:
-    try:
-        s = input('>>')
-    except EOFError:
-        break
-    if not s: continue
-    resultado = parser.parse(s,debug=logger)
-    print(resultado)
-
+# while True:
+#     try:
+#         s = input('>>')
+#     except EOFError:
+#         break
+#     if not s: continue
+#     resultado = parser.parse(s,debug=logger)
+#     print(resultado)

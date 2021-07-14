@@ -5,8 +5,9 @@ from PyQt5.QtWidgets import QApplication, QLabel, QWidget, QMainWindow, QLineEdi
 import sys
 from parser import *
 
-
+#Fernando Villacis
 class MainWindow(QMainWindow):
+    '''Clase para la interfaz grafica'''
 
     def __init__(self):
         super(MainWindow, self).__init__()
