@@ -242,21 +242,21 @@ def p_error(p):
     print("Ups! tuviste un error.")
 
 
-# parser = yacc.yacc()
+parser = yacc.yacc()
 
-# logging.basicConfig(
-#     level = logging.DEBUG,
-#     filename = "parselog.txt",
-#     filemode = "w",
-#     format = "%(filename)10s:%(lineno)4d:%(message)s"
-# )
-# logger = logging.getLogger()
+logging.basicConfig(
+    level = logging.DEBUG,
+    filename = "parselog.txt",
+    filemode = "w",
+    format = "%(filename)10s:%(lineno)4d:%(message)s"
+)
+logger = logging.getLogger()
 
-# while True:
-#     try:
-#         s = input('>>')
-#     except EOFError:
-#         break
-#     if not s: continue
-#     resultado = parser.parse(s,debug=logger)
-#     print(resultado)
+while True:
+    try:
+        s = input('>>')
+    except EOFError:
+        break
+    if not s: continue
+    resultado = parser.parse(s,debug=logger)
+    print(resultado)

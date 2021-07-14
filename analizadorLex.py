@@ -10,16 +10,16 @@ class AnalizadorLexico():
         'until': 'UNTIL',
         'unless': 'UNLESS',
         'end': 'END',
-        'def': 'DEF',
+        #'def': 'DEF',
         'do': 'DO',
         'else': 'ELSE',
         'elsif': 'ELSIF',
         'for': 'FOR',
         'if': 'IF',
         'in': 'IN',
-        'not': 'NOT',
-        'or': 'OR',
-        'return': 'RETURN',
+        #'not': 'NOT',
+        #'or': 'OR',
+        #'return': 'RETURN',
         'then': 'THEN',
         'while': 'WHILE',
         'puts' : 'PUTS'
@@ -32,17 +32,17 @@ class AnalizadorLexico():
                  'CORCHETEDER',
                  'LLAVEIZ',
                  'LLAVEDER',
-                 'COMILLAS',
-                 'DOLAR',
+                 #'COMILLAS',
+                 #'DOLAR',
                  'COMA',
-                 'PIPE',
+                 #'PIPE',
                  'MAYOR',
                  'PARENIZ',
                  'PARENDER',
                  'IGUAL',
-                 'CONCATENAR',
+                 #'CONCATENAR',
                  'INTERVALO',
-                 'IGNORAR',
+                 #'IGNORAR',
                  'MENOR',
                  'ID',
                  'SUMAR',
@@ -54,7 +54,7 @@ class AnalizadorLexico():
                  'IGUALIGUAL',
                  'NOIGUAL',
                  'NEWLINE',
-                 'PUNTO',
+                 #'PUNTO',
                  'ARROBA',
                  'DARROBA',
                  'STRING',
@@ -68,15 +68,15 @@ class AnalizadorLexico():
     t_CORCHETEDER=r'\]'
     t_LLAVEIZ=r'\{'
     t_LLAVEDER=r'\}'
-    t_COMILLAS=r'\"'
-    t_DOLAR=r'\$'
+    #t_COMILLAS=r'\"'
+    #t_DOLAR=r'\$'
     t_COMA=r'\,'
-    t_PIPE=r'\|'
+    #t_PIPE=r'\|'
     t_MAYOR = r'>'
     t_PARENIZ=r'\('
     t_PARENDER=r'\)'
     t_IGUAL=r'='
-    t_CONCATENAR=r'<<'
+    #t_CONCATENAR=r'<<'
     t_INTERVALO=r'\.\.'
     t_MENOR=r'<'
     t_SUMAR=r'\+'
@@ -87,7 +87,7 @@ class AnalizadorLexico():
     t_MENORIGUAL=r'<='
     t_IGUALIGUAL = r'=='
     t_NOIGUAL = r'!='
-    t_PUNTO=r'\.'
+    #t_PUNTO=r'\.'
     t_ARROBA=r'@' 
     t_DARROBA=r'@@'
     t_HASHROCKET= r'=>'
