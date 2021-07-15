@@ -50,7 +50,7 @@ class MainWindow(QMainWindow):
         self.compileButton.move(475, 160)
         self.compileButton.clicked.connect(self.click_compile)
         self.compileButton.setStyleSheet('background-color: #9ED36A')
-        self.compileButton.setText('Compile')
+        self.compileButton.setText('Ejecutar')
 
         self.fileButton = QPushButton(self)
         self.fileButton.resize(100, 32)
