@@ -1,20 +1,28 @@
+<<<<<<< HEAD
+from PyQt5.QtWidgets import QApplication, QLabel, QMainWindow, QPushButton, QPlainTextEdit, QFileDialog, QScrollArea
+from PyQt5.QtWidgets import QApplication, QLabel, QMainWindow, QPushButton, QPlainTextEdit
+=======
 from PyQt5 import QtCore, QtGui
 from PyQt5.QtCore import Qt, pyqtSlot
 from PyQt5.QtWidgets import QApplication, QLabel, QWidget, QMainWindow, QLineEdit, QPushButton, QTextEdit, \
-    QPlainTextEdit, QVBoxLayout, QFileDialog
+    QPlainTextEdit, QVBoxLayout
 import sys
 from parser import *
-from analizadorLex import error
 
-#Francisco Villacis
+
+>>>>>>> 504466d3375733a8bdeecf6cc61e9bb092b65997
+from pyqt5_plugins.examplebutton import QtWidgets
+
+from parser import *
 class MainWindow(QMainWindow):
-    '''Clase para la interfaz grafica'''
+
     def __init__(self):
         super(MainWindow, self).__init__()
         self.setStyleSheet("background-color: #212121;")
 
+
         self.title= QLabel(self)
-        self.title.setText("You can try it typing your code here")
+        self.title.setText("You can try it entering line by line")
         self.title.resize(300,50)
         self.title.move(10,10)
         self.title.setStyleSheet("color: white;")
@@ -25,20 +33,8 @@ class MainWindow(QMainWindow):
         self.file.move(10, 180)
         self.file.setStyleSheet("color: white;")
 
-        self.lexical = QLabel(self)
-        self.lexical.setText("Lexical analysis")
-        self.lexical.resize(300, 50)
-        self.lexical.move(10, 330)
-        self.lexical.setStyleSheet("color: white;")
-
-        self.sintax = QLabel(self)
-        self.sintax.setText("Sintax analysis")
-        self.sintax.resize(300, 50)
-        self.sintax.move(530, 330)
-        self.sintax.setStyleSheet("color: white;")
-
         self.qline = QPlainTextEdit(self)
-        self.qline.setFixedSize(1000, 100)
+        self.qline.setFixedSize(700, 100)
         self.qline.setPlaceholderText("Enter your code here...")
         self.qline.setStyleSheet("border: 3"
                             "px solid gray;outline: none; color: white;")
@@ -47,7 +43,7 @@ class MainWindow(QMainWindow):
         self.compileButton = QPushButton(self)
         self.compileButton.resize(100, 32)
 
-        self.compileButton.move(475, 160)
+        self.compileButton.move(325, 160)
         self.compileButton.clicked.connect(self.click_compile)
         self.compileButton.setStyleSheet('background-color: #9ED36A')
         self.compileButton.setText('Compile')
@@ -58,20 +54,15 @@ class MainWindow(QMainWindow):
         self.fileButton.clicked.connect(self.click_file)
         self.fileButton.setStyleSheet('background-color: #9ED36A')
         self.fileButton.setText('Choose file')
+
         self.qlabel = QPlainTextEdit(self)
         self.qlabel.setStyleSheet("border: 3""px solid gray;outline: none; color: white;")
         self.qlabel.move(0, 370)
-        self.qlabel.resize(470, 320)
+        self.qlabel.resize(700, 320)
         self.qlabel.setReadOnly(True)
 
-        self.qlabelResult = QPlainTextEdit(self)
-        self.qlabelResult.setStyleSheet("border: 3""px solid gray;outline: none; color: white;")
-        self.qlabelResult.move(520, 370)
-        self.qlabelResult.resize(470, 320)
-        self.qlabelResult.setReadOnly(True)
-
         self.setWindowTitle("Ruby Compiler")
-        self.setFixedSize(1000, 700)
+        self.setFixedSize(700, 700)
 
 
     def return_pressed(self):
@@ -90,27 +81,15 @@ class MainWindow(QMainWindow):
         print(s)
 
     def click_compile(self):
-        analizador = AnalizadorLexico()
-        analizador.build()
-        tokns = analizador.tokenizer(self.qline.toPlainText())
-        if (len(tokns) > 0):
-            text = 'Los tokens son validos!' + "\n"
-            for token in tokns:
-                text += str(token) + "\n"
+        parser = yacc.yacc()
+        code = self.qline.toPlainText()
+        resultado = parser.parse(code)
+        if resultado is not None:
             self.qlabel.clear()
-            self.qlabel.insertPlainText(text)
-            parser = yacc.yacc()
-            code = self.qline.toPlainText()
-            resultado = parser.parse(code)
-            if resultado is not None:
-                self.qlabelResult.clear()
-                self.qlabelResult.insertPlainText(str(resultado))
-            else:
-                self.qlabelResult.clear()
-                self.qlabelResult.insertPlainText("Not Ruby languaje")
-                self.qlabel.insertPlainText(error)
-
-
+            self.qlabel.insertPlainText(str(resultado))
+        else:
+            self.qlabel.clear()
+            self.qlabel.insertPlainText("Not Ruby languaje")
 
     def click_file(self):
         options = QFileDialog.Options()
@@ -128,6 +107,7 @@ class MainWindow(QMainWindow):
                     text += str(token) + "\n"
                 self.qlabel.clear()
                 self.qlabel.insertPlainText(text)
+
 
 
 

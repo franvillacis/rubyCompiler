@@ -1,5 +1,6 @@
 import ply.lex as lex
 
+
 class AnalizadorLexico():
     ''' Clase que se encarga de hacer las deficiones de los tokens y palabras reservadas'''
 
@@ -123,6 +124,7 @@ class AnalizadorLexico():
 
     def t_error(self,t):
             print("Caracter no reconocido '%s'" % t.value[0])
+            self.error = str(t.value[0])
             t.lexer.skip(1)
     
     def t_NEWLINE(self,t):
@@ -145,7 +147,9 @@ class AnalizadorLexico():
         return tokns
 
 
+
 # Test del archivo de prueba de Ruby
+error = ""
 archivo_prueba = open('test.rb', 'r').read()
 analizador = AnalizadorLexico()
 analizador.build()

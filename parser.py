@@ -1,6 +1,7 @@
 import ply.yacc as yacc
 import logging
 from analizadorLex import AnalizadorLexico
+from interfaz import MainWindow
 tokens = AnalizadorLexico.tokens
 
 array = []
