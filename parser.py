@@ -1,7 +1,7 @@
 import ply.yacc as yacc
 import logging
 from analizadorLex import AnalizadorLexico
-from interfaz import MainWindow
+#from interfaz import MainWindow
 tokens = AnalizadorLexico.tokens
 
 array = []
@@ -44,8 +44,8 @@ def p_estructura_control(p):
 
 #Ana Briones
 def p_if(p):
-    ''' if  : IF PARENIZ logica PARENDER THEN sentencia
-            | IF logica THEN sentencia'''
+    ''' if  : IF PARENIZ logica PARENDER THEN sentencia END
+            | IF logica THEN sentencia END'''
     if p[2] == "(":
         if p[3]:
             p[0]=p[6]

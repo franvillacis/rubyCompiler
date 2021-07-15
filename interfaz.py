@@ -109,6 +109,12 @@ class MainWindow(QMainWindow):
                 self.qlabelResult.clear()
                 self.qlabelResult.insertPlainText("Not Ruby languaje")
                 self.qlabel.insertPlainText(error)
+        else:
+            text = 'Caracter no reconocido!'
+            for token in tokns:
+                text+= str(tokns)+"\n"
+            self.qlabel.clear()
+            self.qlabel.insertPlainText(text)
 
 
 
