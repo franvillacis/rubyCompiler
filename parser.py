@@ -137,7 +137,7 @@ def p_asignar_declarador(p):
    p[0] = p[1] = p[3]
 
 
-#Ana Briones 
+#Ana Briones & Andres Noboa
 #Estructura de datos: Array
 def p_arrayWrap(p):
     '''
